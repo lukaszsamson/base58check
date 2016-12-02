@@ -22,7 +22,7 @@ defmodule Base58Check.Mixfile do
   defp package do
     [contributors: ["Gabriel Jaldon", "Łukasz Samson"],
      licenses: ["MIT"],
-     links: %{github: "https://github.com/gjaldon/base58check"}]
+     links: %{github: "https://github.com/lukaszsamson/base58check"}]
   end
 
   defp deps do
