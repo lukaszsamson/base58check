@@ -8,8 +8,8 @@ defmodule Base58Check.Mixfile do
      deps: deps,
      package: package,
      name: "Base58Check",
-     source_url: "https://github.com/gjaldon/base58check",
-     homepage_url: "https://github.com/gjaldon/base58check",
+     source_url: "https://github.com/lukaszsamson/base58check",
+     homepage_url: "https://github.com/lukaszsamson/base58check",
      description: """
      Elixir implementation of Base58Check encoding meant for Bitcoin
      """]
@@ -20,7 +20,7 @@ defmodule Base58Check.Mixfile do
   end
 
   defp package do
-    [contributors: ["Gabriel Jaldon"],
+    [contributors: ["Gabriel Jaldon", "Łukasz Samson"],
      licenses: ["MIT"],
      links: %{github: "https://github.com/gjaldon/base58check"}]
   end

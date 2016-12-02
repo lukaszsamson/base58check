@@ -1,13 +1,18 @@
 Base58Check
 ===========
-[Base58Check](https://en.bitcoin.it/wiki/Base58Check_encoding) encoding in Elixir with the Bitcoin-specific alphabet. 
+[Base58Check](https://en.bitcoin.it/wiki/Base58Check_encoding) encoding in Elixir with the Bitcoin-specific alphabet.
+
+Forked from [https://github.com/gjaldon/base58check](https://github.com/gjaldon/base58check)
+Removed dependency on erlsha2 to make it work on Windows
+Fixed problems with parsing of addresses starting with '1'
+Fixed problems with parsing of malformed addresses
 
 
 Usage
 =====
-Base85Check exposes 4 functions: `encode58/1, decode58/1, encode58check/2, decode58check/1`. `encode58check/2` accepts
+Base58Check exposes 4 functions: `encode58/1, decode58/1, encode58check/2, decode58check/1`. `encode58check/2` accepts
 a hex string, binary or integer and returns base58-encoded string. `decode58check/1` accepts a base58-encoded string
-and returns a binary. 
+and returns a binary.
 
 ```elixir
 iex(1)> Base58Check.encode58check(128, "1e99423a4ed27608a15a2616a2b0e9e52ced330ac530edcc32c8ffc6a526aedd")
@@ -26,6 +31,7 @@ License
 The MIT License (MIT)
 
 Copyright (c) 2015 Gabriel Jaldon
+              2016 Łukasz Samson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,4 +50,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
