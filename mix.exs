@@ -16,7 +16,7 @@ defmodule Base58Check.Mixfile do
   end
 
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :crypto]]
   end
 
   defp package do
@@ -26,6 +26,6 @@ defmodule Base58Check.Mixfile do
   end
 
   defp deps do
-    [{:erlsha2, github: "vinoski/erlsha2"}]
+    []
   end
 end
