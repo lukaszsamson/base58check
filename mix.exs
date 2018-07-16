@@ -4,7 +4,7 @@ defmodule Base58Check.Mixfile do
   def project do
     [app: :base58check,
      version: "0.1.0",
-     elixir: "~> 1.0",
+     elixir: "~> 1.5",
      deps: deps(),
      package: package(),
      name: "Base58Check",
