@@ -39,6 +39,9 @@ defmodule Base58Check.Mixfile do
   end
 
   defp deps do
-    [{:dialyxir, "~> 1.0.0-rc.7", only: [:dev], runtime: false}]
+    [
+      {:dialyxir, "~> 1.0.0-rc.7", only: [:dev], runtime: false},
+      {:gradualixir, github: "overminddl1/gradualixir", ref: "master", only: [:dev], runtime: false}
+    ]
   end
 end
