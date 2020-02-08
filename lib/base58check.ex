@@ -33,8 +33,6 @@ defmodule Base58Check do
     decode58(to_charlist(code), 0)
   end
 
-  def decode58(_code), do: raise(ArgumentError, "expects base58-encoded binary")
-
   defp decode58([], acc), do: acc
 
   defp decode58([c | code], acc) do

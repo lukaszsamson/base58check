@@ -16,10 +16,6 @@ defmodule Base58CheckTest do
     assert decode58("z") == 57
     assert decode58("Jf") == 1024
     assert decode58("BukQL") == 123_456_789
-
-    assert_raise ArgumentError, fn ->
-      decode58(123)
-    end
   end
 
   @test_hex "1e99423a4ed27608a15a2616a2b0e9e52ced330ac530edcc32c8ffc6a526aedd"
