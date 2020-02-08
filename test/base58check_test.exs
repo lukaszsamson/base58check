@@ -40,7 +40,7 @@ defmodule Base58CheckTest do
   end
 
   test "decode58check/1 accepts hex and returns prefix and payload" do
-    {prefix, payload} = decode58check(@test_base58, 37)
+    {prefix, payload} = decode58check(@test_base58, 32)
     assert Base.encode16(payload, case: :lower) == @test_hex
     assert :binary.decode_unsigned(prefix) == 128
   end
@@ -78,6 +78,16 @@ defmodule Base58CheckTest do
   test "decode58check/1 raises on invalid chars in address" do
     assert_raise ArgumentError, fn ->
       decode58check("0J98t1WpEZ73CNmQviecrnyiWrnqRhWNLy")
+    end
+  end
+
+  test "decode58check/1 raises on address with leading `1` dropped" do
+    assert {<<0>>,
+            <<11, 169, 175, 6, 251, 40, 253, 242, 64, 156, 131, 45, 88, 90, 235, 125, 185, 138,
+              133, 38>>} == decode58check("124fhwYEZQKS5P7YZJHUNZPYa8goeTf7JX")
+
+    assert_raise ArgumentError, fn ->
+      decode58check("24fhwYEZQKS5P7YZJHUNZPYa8goeTf7JX")
     end
   end
 end

@@ -58,32 +58,30 @@ defmodule Base58Check do
     encode58check(prefix, data)
   end
 
+  defp convert_leading_ones("1" <> data, encoded_zeroes) do
+    encoded_zeroes = <<0>> <> encoded_zeroes
+    convert_leading_ones(data, encoded_zeroes)
+  end
+
+  defp convert_leading_ones(_data, encoded_zeroes), do: encoded_zeroes
+
+  @checksum_size 4
+  @version_size 1
+
   @spec decode58check(binary, pos_integer) :: {<<_::8>>, binary}
-  def decode58check(code, length \\ 25) do
+  def decode58check(code, payload_size \\ 20) do
     decoded_bin = decode58(code) |> :binary.encode_unsigned()
+    decoded_bin = convert_leading_ones(code, decoded_bin)
+
     size = byte_size(decoded_bin)
-    checksum_size = 4
 
-    if size < checksum_size do
+    if size != payload_size + @checksum_size + @version_size do
       raise ArgumentError,
-            "address of size #{size} is too short, expected at least #{checksum_size}"
+            "address of size #{size}, expected #{payload_size + @checksum_size + @version_size}"
     end
 
-    if size > length do
-      raise ArgumentError, "address of size #{size} is too long, expected #{length}"
-    end
-
-    payload_size = length - 5
-
-    padding =
-      if size < length do
-        for _ <- 1..(length - byte_size(decoded_bin)), into: <<>>, do: <<0>>
-      else
-        <<>>
-      end
-
-    <<prefix::binary-size(1), payload::binary-size(payload_size),
-      checksum::binary-size(checksum_size)>> = padding <> decoded_bin
+    <<prefix::binary-size(@version_size), payload::binary-size(payload_size),
+      checksum::binary-size(@checksum_size)>> = decoded_bin
 
     if generate_checksum(prefix <> payload) == checksum do
       {prefix, payload}
